@@ -124,7 +124,7 @@ def save_python_function(name, func):
 
     # Set up serialization directory
     # serialization_dir = os.path.abspath(tempfile.mkdtemp(suffix='clipper'))
-    serialization_dir = "model/{}/".format(name)
+    serialization_dir = "/tmpfs/model/{}/".format(name)
     os.makedirs(serialization_dir)
     logger.info("Saving function to {}".format(serialization_dir))
 

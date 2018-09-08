@@ -48,7 +48,7 @@ class PyTorchContainer():
     def __init__(self, model_name):
         # self.input_type = rpc.string_to_input_type(input_type)
         # modules_folder_path = "{dir}/modules/".format(dir=path)
-        modules_folder_path = "model/{model_name}".format(model_name=model_name)
+        modules_folder_path = "/tmpfs/model/{model_name}".format(model_name=model_name)
         sys.path.append(os.path.abspath(modules_folder_path))
         predict_fname = "func.pkl"
         # predict_path = "{dir}/{predict_fname}".format(
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     parser.add_argument('-m', type=str, dest="model_name", action="store", required=True)
     args = parser.parse_args()
 
-    f = open('/tmp/tmp.txt', 'w')
+    f = open('/tmp/tmp.txt', 'w+')
 
     load_start = datetime.datetime.now()
     try:
