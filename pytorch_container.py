@@ -116,7 +116,8 @@ if __name__ == "__main__":
     inputs = torch.randn(1, 3, 224, 224)
 
     predict_start = datetime.datetime.now()
-    model.predict_floats(torch.autograd.Variable(inputs))
+    # model.predict_floats(torch.autograd.Variable(inputs))
+    model(torch.autograd.Variable(inputs))
     predict_end = datetime.datetime.now()
 
     f.write("model loading takes %d s, %d us\n" % ((load_end - load_start).seconds, (load_end - load_start).microseconds))
