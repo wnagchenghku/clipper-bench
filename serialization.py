@@ -11,6 +11,25 @@ import tarfile
 
 trained_models = ['resnet18', 'densenet201']
 
+logger = logging.getLogger(__name__)
+
+class ClipperException(Exception):
+    """A generic exception indicating that Clipper encountered a problem."""
+
+    def __init__(self, msg, *args):
+        self.msg = msg
+        super(Exception, self).__init__(msg, *args)
+
+if sys.version_info < (3, 0):
+    try:
+        from cStringIO import StringIO
+    except ImportError:
+        from StringIO import StringIO
+    PY3 = False
+else:
+    from io import BytesIO as StringIO
+    PY3 = True
+
 def build_model(name,
                 base_image,
                 container_registry=None,
@@ -92,7 +111,8 @@ def save_python_function(name):
 
 def deploy_pytorch_model(name,
                          pytorch_model,
-                         base_image = "default"):
+                         base_image = "default",
+                         pkgs_to_install=None):
 
     try:
         serialization_dir = save_python_function(name)
