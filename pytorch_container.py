@@ -95,11 +95,17 @@ if __name__ == "__main__":
 
     f = open('/tmp/tmp.txt', 'w+')
 
+    serialization_dir = "/tmpfs/model/{}.model".format(args.model_name)
+
     load_start = datetime.datetime.now()
     try:
         # model = PyTorchContainer(rpc_service.get_model_path(),
         #                          rpc_service.get_input_type())
-        model = PyTorchContainer(args.model_name)
+        
+        # model = PyTorchContainer(args.model_name)
+
+        model = torch.load(serialization_dir)
+        
         sys.stdout.flush()
         sys.stderr.flush()
     except ImportError:
