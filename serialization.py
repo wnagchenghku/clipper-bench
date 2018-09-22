@@ -117,7 +117,9 @@ def deploy_pytorch_model(name,
     try:
         serialization_dir = save_python_function(name)
 
-        torch.save(pytorch_model, serialization_dir)
+        torch.save(pytorch_model.state_dict(), serialization_dir) # saves only the model parameters
+        
+        # torch.save(pytorch_model, serialization_dir)
 
         py_minor_version = (sys.version_info.major, sys.version_info.minor)
         # Check if Python 2 or Python 3 image
@@ -167,6 +169,7 @@ def main():
     parser.add_argument("-m", dest="model_name", type=str, required=True)
     para_sets = parser.parse_args();
 
+    torch.seed(0)
     if para_sets.model_name == "all":
         for model_name in trained_models:
             deploy_and_test_model(getattr(models, model_name)(), model_name)

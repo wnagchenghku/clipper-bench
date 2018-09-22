@@ -7,6 +7,7 @@ import json
 # import numpy as np
 import cloudpickle
 import torch
+import torchvision.models as models
 import importlib
 from torch import nn
 from torch.autograd import Variable
@@ -97,6 +98,8 @@ if __name__ == "__main__":
 
     serialization_dir = "/tmpfs/model/{}.model".format(args.model_name)
 
+    model = getattr(models, args.model_name)()
+
     load_start = datetime.datetime.now()
     try:
         # model = PyTorchContainer(rpc_service.get_model_path(),
@@ -104,7 +107,8 @@ if __name__ == "__main__":
         
         # model = PyTorchContainer(args.model_name)
 
-        model = torch.load(serialization_dir)
+        model.load_state_dict(torch.load(serialization_dir)) # loads only the model parameters
+        # model = torch.load(serialization_dir)
         
         sys.stdout.flush()
         sys.stderr.flush()
