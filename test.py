@@ -13,7 +13,7 @@ if __name__ == "__main__":
     load_start = datetime.datetime.now()
     model.load_state_dict(torch.load(serialization_dir)) # loads only the model parameters
     load_end = datetime.datetime.now()
-    inputs.FloatTensor(1, 3, 224, 224)
+    inputs = torch.FloatTensor(1, 3, 224, 224)
     inputs.fill_(1)
     predict_start = datetime.datetime.now()
     model(torch.autograd.Variable(inputs))
