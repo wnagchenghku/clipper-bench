@@ -169,7 +169,7 @@ def main():
     parser.add_argument("-m", dest="model_name", type=str, required=True)
     para_sets = parser.parse_args();
 
-    torch.seed(0)
+    torch.manual_seed(0)
     if para_sets.model_name == "all":
         for model_name in trained_models:
             deploy_and_test_model(getattr(models, model_name)(), model_name)
