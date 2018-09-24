@@ -118,6 +118,7 @@ if __name__ == "__main__":
 
     # rpc_service.start(model)
     # inputs = torch.randn(1, 3, 224, 224)
+    inputs.FloatTensor(1, 3, 224, 224)
     inputs.fill_(1)
 
     predict_start = datetime.datetime.now()
