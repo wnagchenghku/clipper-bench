@@ -32,6 +32,9 @@ do
 
 				# --cpuset-cpus
 				# CPUs in which to allow execution (0-3, 0,1)
+
+				# -p 8080:80/tcp
+				# Map TCP port 80 in the container to TCP port 8080 on the Docker host
 				
 				# docker run -d --rm --net=none --cpuset-cpus="$inner" -v /root/persistent/scripts:/scripts fschmidt/micropython "/scripts/sleep.py" 1>/dev/null 2>&3
 				/root/docker-instrumented/bundles/1.13.0/binary-client/docker run -d --rm --net=none --cpus=1 -v $CONTAINER_OUTPUT:/tmp/tmp.txt -v /tmpfs/model/"$model.model":/tmpfs/model/"$model.model" 1>/dev/null 2>&3
